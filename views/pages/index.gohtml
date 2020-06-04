@@ -1,0 +1,25 @@
+{{ define "pages/index.gohtml" }}
+<!DOCTYPE html>
+<html>
+<head>
+    {{ template "partials/head.gohtml" . }}
+</head>
+<body>
+{{ template "partials/header.gohtml" . }}
+<div class="container-fluid">
+    <div class="row">
+{{/*        //nav here*/}}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            {{ if .body eq "home" }}
+                {{ template "pages/home.gohtml" }}
+            {{ end }}
+
+
+            {{ template "partials/footer.gohtml" }}
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{{ end }}

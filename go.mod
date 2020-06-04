@@ -1,3 +1,3 @@
-module github.com/ms-alex/gin-test-bench
+module github.com/Ms-Alex/gin-test-bench
 
 go 1.14

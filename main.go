@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"github.com/gin-gonic/gin"
@@ -14,6 +13,7 @@ func main() {
 	r.LoadHTMLGlob("views/**/*")
 	r.Static("/public", "./views/public")
 
+	//Testing
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "pong",
@@ -26,18 +26,35 @@ func main() {
 	})
 
 	r.GET("/path-traversal", func(c *gin.Context) {
+		path := c.Query("path")
+		var body string
+		var errMssg error
+
+		if path != "" {
+			content, err := ioutil.ReadFile(path)
+			if err != nil {
+				errMssg = err
+			}
+
+			body = string(content)
+		}
+
 		c.HTML(http.StatusOK, "pages/path_traversal.gohtml", gin.H{
+			"body": body,
+			"error": errMssg,
 		})
 	})
 
 	r.GET("/ssrf", func(c *gin.Context) {
-
 		url := c.Query("url")
 		var body string
+		var errMssg error
+
 		if url != "" {
 			resp, err := http.Get(url)
+
 			if err != nil {
-				fmt.Println(err)
+				errMssg = err
 			}
 			defer resp.Body.Close()
 			body_bytes, _ := ioutil.ReadAll(resp.Body)
@@ -46,6 +63,7 @@ func main() {
 
 		c.HTML(http.StatusOK, "pages/ssrf.gohtml", gin.H{
 			"body": body,
+			"error": errMssg,
 		})
 	})
 

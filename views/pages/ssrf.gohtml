@@ -19,11 +19,14 @@
                 <form action="/ssrf" method="get">
                     <div class="form-group" style="width:30%;">
                         <input name="url" class="form-control" placeholder="url">
+                        <small class="form-text text-muted">Try to read contents from a url. Example: http://google.com</small>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
                 {{ .body }}
+
+                {{ .error }}
 
             </div>
 

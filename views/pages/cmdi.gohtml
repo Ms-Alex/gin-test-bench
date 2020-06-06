@@ -16,6 +16,18 @@
                 <!-- PAGE BODY -->
                 <h3 class="page-header">CMD Injection</h3>
 
+                <form>
+                    <div class="form-group" style="width:30%;">
+                        <input name="command" class="form-control" placeholder="command">
+                        <small class="form-text text-muted">Try to run an os command. Example: echo "hello"</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+                {{ .body }}
+
+                {{ .error }}
+
 
             </div>
 

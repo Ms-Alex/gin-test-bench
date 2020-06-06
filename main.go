@@ -34,8 +34,7 @@ func main() {
 	})
 
 	r.GET("/cmdi", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "pages/cmdi.gohtml", gin.H{
-		})
+		controllers.CmdInjectionHandler(c)
 	})
 
 	r.GET("/sqli", func(c *gin.Context) {

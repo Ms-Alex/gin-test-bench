@@ -1,10 +1,10 @@
 package main
 
 import (
-	"io/ioutil"
 	"net/http"
+	"fmt"
 	"github.com/gin-gonic/gin"
-	//"github.com/ms-alex/"
+	"github.com/Ms-Alex/gin-test-bench/controllers"
 )
 
 func main() {
@@ -26,45 +26,11 @@ func main() {
 	})
 
 	r.GET("/path-traversal", func(c *gin.Context) {
-		path := c.Query("path")
-		var body string
-		var errMssg error
-
-		if path != "" {
-			content, err := ioutil.ReadFile(path)
-			if err != nil {
-				errMssg = err
-			}
-
-			body = string(content)
-		}
-
-		c.HTML(http.StatusOK, "pages/path_traversal.gohtml", gin.H{
-			"body": body,
-			"error": errMssg,
-		})
+		controllers.PathTraversalHandler(c)
 	})
 
 	r.GET("/ssrf", func(c *gin.Context) {
-		url := c.Query("url")
-		var body string
-		var errMssg error
-
-		if url != "" {
-			resp, err := http.Get(url)
-
-			if err != nil {
-				errMssg = err
-			}
-			defer resp.Body.Close()
-			body_bytes, _ := ioutil.ReadAll(resp.Body)
-			body = string(body_bytes)
-		}
-
-		c.HTML(http.StatusOK, "pages/ssrf.gohtml", gin.H{
-			"body": body,
-			"error": errMssg,
-		})
+		controllers.SsrfHandler(c)
 	})
 
 	r.GET("/cmdi", func(c *gin.Context) {
@@ -77,6 +43,7 @@ func main() {
 		})
 	})
 
+	fmt.Println("Listening on http://localhost:8080")
 	r.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 

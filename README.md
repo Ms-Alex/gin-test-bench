@@ -8,3 +8,5 @@ Used go-gonic as the framework. For more info on this framework, visit https://g
     go get github.com/Ms-Alex/gin-test-bench
     go run main.go
 ```
+
+View app at http://localhost:8080

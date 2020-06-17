@@ -37,6 +37,10 @@ func main() {
 		controllers.CmdInjectionHandler(c)
 	})
 
+	r.GET("/unvalidated-redirect", func(c *gin.Context) {
+		controllers.UnvalidatedRedirectHandler(c)
+	})
+
 	r.GET("/sqli", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "pages/sqli.gohtml", gin.H{
 		})

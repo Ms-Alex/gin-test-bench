@@ -1,0 +1,36 @@
+{{ define "pages/unvalidated_redirect.gohtml" }}
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        {{ template "partials/head.gohtml" . }}
+    </head>
+    <body>
+    {{ template "partials/header.gohtml" . }}
+    <div class="container-fluid">
+        <div class="row">
+            {{ template "partials/nav.gohtml" }}
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+                <!-- PAGE BODY -->
+                <h3 class="page-header">Unvalidated Redirect</h3>
+
+                <form>
+                    <div class="form-group" style="width:30%;">
+                        <input name="url" class="form-control" value="http://www.example.com/">
+                        <small class="form-text text-muted">Redirect to a site. Example: http://www.example.com</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+
+            {{ template "partials/footer.gohtml" }}
+
+        </div>
+    </div>
+    </body>
+    </html>
+
+{{ end }}
